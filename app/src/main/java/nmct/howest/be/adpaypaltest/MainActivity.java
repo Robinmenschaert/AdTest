@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+/* device id */
+import android.provider.Settings.Secure;
+import android.widget.Toast;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -17,8 +21,16 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
 
+    /* device id */
+    private String android_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        /* device id */
+        android_id = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
+        Toast.makeText(this, android_id, Toast.LENGTH_SHORT).show();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /*interstitial ads*/
@@ -41,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         /*adMob banner*/
 
-//
         MobileAds.initialize(this, "ca-app-pub-3940256099942544/1033173712");
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
